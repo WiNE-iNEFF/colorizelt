@@ -1,8 +1,8 @@
-<center><h1>Colorizelt</h1></center>
-
-<center>Easy color or clear selected text</center>
+# <p align="center">Colorizelt</p>
+### <p align="center">Easy color or clear selected text</p>
 
 <p align="center">
+    <img src='https://visitor-badge.laobi.icu/badge?page_id=WiNE-iNEFF.obsidian-colorizelt&&right_color=green&left_text=Visitors' alt='visitor badge'>
     <a href="https://github.com/WiNE-iNEFF/obsidian-colorizelt/releases/latest">
                 <img src="https://img.shields.io/github/manifest-json/v/WiNE-iNEFF/obsidian-colorizelt?color=blue">
         </a>
