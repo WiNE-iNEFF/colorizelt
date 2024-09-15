@@ -1,0 +1,31 @@
+{
+  "name": "obsidian-colorizelt",
+  "version": "0.0.1",
+  "description": "Easy color and clear selected text",
+  "main": "main.js",
+  "scripts": {
+    "dev": "tsc -w main.ts",
+    "build": "tsc main.ts"
+  },
+  "moduleFileExtensions": [
+    "js",
+    "ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WiNE-iNEFF/obsidian-colorizelt.git"
+  },
+  "author": "Artsem Holub (WiNE-iNEFF)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WiNE-iNEFF/obsidian-colorizelt/issues"
+  },
+  "homepage": "https://github.com/WiNE-iNEFF/obsidian-colorizelt#readme",
+  "dependencies": {
+    "@codemirror/state": "^6.0.0",
+    "@codemirror/view": "^6.0.0",
+    "@types/node": "^22.5.4",
+    "obsidian": "^1.6.6",
+    "typescript": "^4.2.4"
+  }
+}
