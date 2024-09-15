@@ -1,5 +1,5 @@
 {
-  "name": "obsidian-colorizelt",
+  "name": "colorizelt",
   "version": "0.0.1",
   "description": "Easy color and clear selected text",
   "main": "main.js",
@@ -13,14 +13,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WiNE-iNEFF/obsidian-colorizelt.git"
+    "url": "git+https://github.com/WiNE-iNEFF/colorizelt.git"
   },
   "author": "Artsem Holub (WiNE-iNEFF)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/WiNE-iNEFF/obsidian-colorizelt/issues"
+    "url": "https://github.com/WiNE-iNEFF/colorizelt/issues"
   },
-  "homepage": "https://github.com/WiNE-iNEFF/obsidian-colorizelt#readme",
+  "homepage": "https://github.com/WiNE-iNEFF/colorizelt#readme",
   "dependencies": {
     "@codemirror/state": "^6.0.0",
     "@codemirror/view": "^6.0.0",
