@@ -1,6 +1,5 @@
 # <p align="center">Colorizelt</p>
-### <p align="center">Easy color or clear selected text</p>
-
+<img src="https://github.com/WiNE-iNEFF/obsidian-colorizelt/blob/main/img/colorizelt.png" style="border-radius: 10px;">
 <p align="center">
     <img src='https://visitor-badge.laobi.icu/badge?page_id=WiNE-iNEFF.obsidian-colorizelt&&right_color=green&left_text=Visitors' alt='visitor badge'><br>
     <a href="https://github.com/WiNE-iNEFF/obsidian-colorizelt/releases/latest">
@@ -15,3 +14,5 @@
         <img src="https://img.shields.io/github/issues/WiNE-iNEFF/obsidian-colorizelt">
     </a>
 </p>
+
+### <p align="center">Easy color or clear selected text</p>
