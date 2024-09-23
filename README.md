@@ -31,7 +31,7 @@
 - Using the same keyboard shortcuts, remove all colors in the selected fragment
 
 ## <p align="center">Plan for future updates</p>
-- [ ] Add icons for quick access from your phone
+- [x] Add icons for quick access from your phone
 - [ ] Add setting tab for edit some colors
 - [ ] Add more colors
 - [ ] Add different type of text highlights
