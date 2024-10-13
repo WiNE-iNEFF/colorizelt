@@ -3,7 +3,7 @@ import { Editor, Plugin, Notice, App, addIcon } from 'obsidian';
 export default class Colorizelt extends Plugin {
 	async onload() {
 		addIcons()
-		new Notice('Plugin "Colorizelt" v0.0.3 load success!');
+		new Notice('Plugin "Colorizelt" v0.0.4 load success!');
 
 		//red color
 		this.addCommand({
@@ -101,7 +101,7 @@ export default class Colorizelt extends Plugin {
 
 				if (matches.length > 0) {
 					matches.forEach((match) => {
-						selection = selection.replace(match[0], match[1]);
+						selection = selection.replace(match[0], match[2]);
 					});
 					editor.replaceSelection(selection);
 				}
