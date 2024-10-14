@@ -1,9 +1,23 @@
-import { Editor, Plugin, Notice, App, addIcon } from 'obsidian';
+import { Editor, Plugin, Notice, App, addIcon, setIcon, PluginSettingTab, Setting } from 'obsidian';
+
+interface ColorizeltSetting {
+	id: string;
+	name: string;
+	color: string;
+}
+
+const DEFAULT_SETTINGS: ColorizeltSetting[] = [
+	{id: "purple", name: "purple", color: "#7C00FE"},
+	{id: "lightGreen", name: "light green", color: "#06D001"},
+];
 
 export default class Colorizelt extends Plugin {
+	settings: ColorizeltSetting[] = [];
 	async onload() {
 		addIcons()
-		new Notice('Plugin "Colorizelt" v0.0.4 load success!');
+		await this.loadSettings();
+
+		this.addSettingTab(new ColorizeltSettingTab(this.app, this));
 
 		//red color
 		this.addCommand({
@@ -108,6 +122,44 @@ export default class Colorizelt extends Plugin {
 			}
 		});
 		
+		this.createButtonCommands();
+	}
+	
+	async loadSettings() {
+		//await this.saveData(DEFAULT_SETTINGS);
+		let LoadData = await this.loadData();
+		this.settings = Array.isArray(LoadData) ? LoadData : DEFAULT_SETTINGS;
+	}
+
+	async saveSettings() {
+		await this.saveData(this.settings);
+		this.createButtonCommands();
+	}
+	
+	createButtonCommands() {
+		this.settings.forEach((button) => {
+			addIcon(`colorizelt-pen-${button.name.toLowerCase().replace(/\s+/g, '-')}`, `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line"><path d="M12 20h9" stroke="${button.color}"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></svg>`)
+			this.addCommand({
+				id: `color-text-${button.id}`,
+				name: `${button.name.toLowerCase().replace(/\s+/g, '-')}`,
+				icon: `colorizelt-pen-${button.name.toLowerCase().replace(/\s+/g, '-')}`,
+				editorCallback: (editor: Editor) => {
+					let selection = editor.getSelection();
+					const replaced = `<span style="color: ${button.color.toLowerCase().replace(/\s+/g, '-')}">${selection}</span>`
+					const regex = new RegExp(`<span style="color: ${button.color.toLowerCase().replace(/\s+/g, '-')}">(.*?)<\/span>`, 'g');
+					let matches = Array.from(selection.matchAll(regex));
+
+					if (matches.length > 0) {
+						matches.forEach((match) => {
+							selection = selection.replace(match[0], match[1]);
+						});
+						editor.replaceSelection(selection);
+					} else {
+						editor.replaceSelection(replaced);
+					}
+				}
+			});
+		});
 	}
 }
 
@@ -118,4 +170,58 @@ export function addIcons() {
 	addIcon("colorizelt-pen-green", '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line"><path d="M12 20h9" stroke="green"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></svg>');
 	addIcon("colorizelt-pen-blue", '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line"><path d="M12 20h9" stroke="blue"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></svg>');
 	addIcon("colorizelt-clear", '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line"><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></svg>');
+}
+
+export class ColorizeltSettingTab extends PluginSettingTab {
+	plugin: Colorizelt;
+	constructor(app: App, plugin: Colorizelt) {
+		super(app, plugin);
+		this.plugin = plugin;
+	}
+	display(): void {
+		let { containerEl } = this;
+		containerEl.createEl("h1", {text: "Colorizelt Colors Setting"});
+
+		this.plugin.settings.forEach((button, index) => {
+			const setting = new Setting(containerEl)
+				.setName(`Setting for ${button.name.toLowerCase().replace(/\s+/g, '-')}`)
+				.addText(text => text
+					.setValue(button.name.toLowerCase().replace(/\s+/g, '-'))
+					.setPlaceholder('Button name')
+					.onChange(async (value) => {
+						button.name = value;
+						await this.plugin.saveSettings()
+					}))
+				
+			setting.addColorPicker(colorPicker => colorPicker
+					.setValue(button.color)
+					.onChange(async (value) => {
+						button.color = value;
+						await this.plugin.saveSettings();
+					}));
+
+			setting.addButton(btn => {
+				btn.setButtonText("Удалить").onClick(async () => {
+					this.plugin.settings.splice(index, 1);
+					await this.plugin.saveSettings();
+					this.display();
+				});
+			});
+		});
+		
+		const newButtonSetting = new Setting(containerEl)
+			.addButton(btn => {
+				btn.setButtonText("Добавить кнопку")
+					.setCta()
+					.onClick(async () => {
+						this.plugin.settings.push({
+							id: `button-{Date.now()}`,
+							name: "null",
+							color: "#000000"
+						});
+						await this.plugin.saveSettings();
+						this.display();
+					});
+			});
+	}
 }
