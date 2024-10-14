@@ -20,20 +20,17 @@
 ## <p align="center">Features</p>
 - Add any of the available colors with a simple keyboard shortcut (You can change the keyboard shortcut in Obsidian settings) or using command pallete
   ```
-  Windows:
-  Shift + Ctrl + 1 for red color; Shift + Ctrl + 2 for yellow color
-  Shift + Ctrl + 3 for green color: Shift + Ctrl + 4 for blue color
-  Mac:
-  Shift + Command + 1 for red color: Shift + Command + 2 for yellow color
-  Shift + Command + 3 for green color: Shift + Command + 4 for blue color
+  Windows/Mac:
+  Shift + Ctrl/Command + 1 for red color; Shift + Ctrl/Command + 2 for yellow color
+  Shift + Ctrl/Command + 3 for green color: Shift + Ctrl/Command + 4 for blue color
   ```
 - Easy work on mobile
 - Using the same keyboard shortcuts, remove all colors in the selected fragment
 
 ## <p align="center">Plan for future updates</p>
 - [x] Add icons for quick access from your phone
-- [ ] Add setting tab for edit some colors
-- [ ] Add more colors
+- [x] Add setting tab for edit some colors
+- [x] Add more colors
 - [ ] Add different type of text highlights
 
 <hr>
