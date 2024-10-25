@@ -34,9 +34,9 @@
 - [ ] Add different type of text highlights
 
 ## <p align="center">Development support</p>
-If you want to support this project and author of this project:
-**TON**: *UQDXHLtVLfeMsUjk_XtvgEC6CYxo63ZkLOrrFlaAe2cGn3-Z*
-**BTC**: *3KhWEKA2LpGeesshPCfgRRLsZuBHFtCnfU*
+If you want to support this project and author of this project:</br>
+**TON**: *UQDXHLtVLfeMsUjk_XtvgEC6CYxo63ZkLOrrFlaAe2cGn3-Z*</br>
+**BTC**: *3KhWEKA2LpGeesshPCfgRRLsZuBHFtCnfU*</br>
 **USDT (TRC20)**: *TGfzwpq2FhQbWisZMWyY98h2KgqV2JVjFH*
 
 <hr>
