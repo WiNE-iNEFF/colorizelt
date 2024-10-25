@@ -18,13 +18,13 @@
 ### <p align="center">Easy color or clear selected text</p>
 
 ## <p align="center">Features</p>
-- Add any of the available colors with a simple keyboard shortcut (You can change the keyboard shortcut in Obsidian settings) or using command pallete
+- Add any of the available colors to text with a simple keyboard shortcut or using command pallete
   ```
   Windows/Mac:
   Shift + Ctrl/Command + 1 for red color; Shift + Ctrl/Command + 2 for yellow color
   Shift + Ctrl/Command + 3 for green color: Shift + Ctrl/Command + 4 for blue color
   ```
-- Easy work on mobile
+- Easy work on mobile with using buttons
 - Using the same keyboard shortcuts, remove all colors in the selected fragment
 
 ## <p align="center">Plan for future updates</p>
@@ -32,6 +32,12 @@
 - [x] Add setting tab for edit some colors
 - [x] Add more colors
 - [ ] Add different type of text highlights
+
+## <p align="center">Development support</p>
+If you want to support this project and author of this project:
+**TON**: *UQDXHLtVLfeMsUjk_XtvgEC6CYxo63ZkLOrrFlaAe2cGn3-Z*
+**BTC**: *3KhWEKA2LpGeesshPCfgRRLsZuBHFtCnfU*
+**USDT (TRC20)**: *TGfzwpq2FhQbWisZMWyY98h2KgqV2JVjFH*
 
 <hr>
 <p align="center">MIT licensed | Copyright Ⓒ 2024 Artsem Holub</p>
