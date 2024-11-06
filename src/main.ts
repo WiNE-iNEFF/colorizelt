@@ -1,4 +1,4 @@
-import { Editor, Plugin, Notice, App, addIcon, setIcon, PluginSettingTab, Setting } from 'obsidian';
+import { Editor, Plugin, App, addIcon, PluginSettingTab, Setting } from 'obsidian';
 
 interface ColorizeltSetting {
 	id: string;
@@ -180,11 +180,12 @@ export class ColorizeltSettingTab extends PluginSettingTab {
 	}
 	display(): void {
 		let { containerEl } = this;
+		containerEl.empty();
 		containerEl.createEl("h1", {text: "Colorizelt Colors Setting"});
 
 		this.plugin.settings.forEach((button, index) => {
 			const setting = new Setting(containerEl)
-				.setName(`Setting for ${button.name.toLowerCase().replace(/\s+/g, '-')}`)
+				.setName(`${button.name.toLowerCase().replace(/\s+/g, '-')}`)
 				.addText(text => text
 					.setValue(button.name.toLowerCase().replace(/\s+/g, '-'))
 					.setPlaceholder('Button name')
@@ -192,7 +193,7 @@ export class ColorizeltSettingTab extends PluginSettingTab {
 						button.name = value;
 						await this.plugin.saveSettings()
 					}))
-				
+
 			setting.addColorPicker(colorPicker => colorPicker
 					.setValue(button.color)
 					.onChange(async (value) => {
@@ -200,28 +201,27 @@ export class ColorizeltSettingTab extends PluginSettingTab {
 						await this.plugin.saveSettings();
 					}));
 
-			setting.addButton(btn => {
-				btn.setButtonText("Удалить").onClick(async () => {
-					this.plugin.settings.splice(index, 1);
-					await this.plugin.saveSettings();
-					this.display();
-				});
-			});
+			setting.addButton(btn => btn
+					.setButtonText("Delete")
+					.onClick(async () => {
+						this.plugin.settings.splice(index, 1);
+						await this.plugin.saveSettings();
+						this.display();
+					}));
 		});
 		
 		const newButtonSetting = new Setting(containerEl)
-			.addButton(btn => {
-				btn.setButtonText("Добавить кнопку")
+			.addButton(btn => btn
+					.setButtonText("Add Button")
 					.setCta()
 					.onClick(async () => {
 						this.plugin.settings.push({
 							id: `button-{Date.now()}`,
-							name: "null",
+							name: "000000",
 							color: "#000000"
 						});
 						await this.plugin.saveSettings();
 						this.display();
-					});
-			});
+					}));
 	}
 }
