@@ -9,7 +9,7 @@
     <a href="https://github.com/WiNE-iNEFF/obsidian-colorizelt/blob/main/LICENSE">
         <img src="https://img.shields.io/github/license/WiNE-iNEFF/obsidian-colorizelt">
     </a>
-    <img src="https://img.shields.io/github/downloads/WiNE-iNEFF/obsidian-colorizelt/total">
+    <img src="https://img.shields.io/github/downloads/WiNE-iNEFF/colorizelt/total">
     <a href="https://github.com/WiNE-iNEFF/obsidian-colorizelt/issues">
         <img src="https://img.shields.io/github/issues/WiNE-iNEFF/obsidian-colorizelt">
     </a>
