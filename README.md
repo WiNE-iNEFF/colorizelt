@@ -1,7 +1,7 @@
 # <p align="center">Colorizelt</p>
 <img src="https://github.com/WiNE-iNEFF/colorizelt/blob/main/img/colorizelt.png" style="border-radius: 10px;">
 <p align="center">
-    <img src='https://visitor-badge.laobi.icu/badge?page_id=WiNE-iNEFF.colorizelt&&right_color=green&left_text=Visitors' alt='visitor badge'><br>
+    <img src='https://visitor-badge.laobi.icu/badge?page_id=WiNE-iNEFF.obsidian-colorizelt&&right_color=green&left_text=Visitors' alt='visitor badge'><br>
     <a href="https://github.com/WiNE-iNEFF/colorizelt/releases/latest">
         <img src="https://img.shields.io/github/manifest-json/v/WiNE-iNEFF/colorizelt?color=blue">
     </a>
