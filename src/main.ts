@@ -1,4 +1,4 @@
-import { Editor, Plugin, App, addIcon, PluginSettingTab, Setting } from 'obsidian';
+import { Editor, Plugin, App, addIcon, PluginSettingTab, Setting, Modal } from 'obsidian';
 
 interface ColorizeltSetting {
 	id: string;
@@ -123,6 +123,20 @@ export default class Colorizelt extends Plugin {
 		});
 		
 		this.createButtonCommands();
+
+		this.registerEvent(
+			this.app.workspace.on('editor-menu', (menu, editor, view) => {
+				menu.addItem(item => item
+					.setTitle("Edit Colors")
+					.setIcon("pen")
+					.onClick(async () => {
+						new EditColorsModal(this.app, this.settings, this.saveSettings.bind(this)).open();
+					})
+				);
+			
+			})
+		);
+
 	}
 	
 	async loadSettings() {
@@ -163,7 +177,6 @@ export default class Colorizelt extends Plugin {
 	}
 }
 
-
 export function addIcons() {
 	addIcon("colorizelt-pen-red", '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line"><path d="M12 20h9" stroke="red"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></svg>');
 	addIcon("colorizelt-pen-yellow", '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line"><path d="M12 20h9" stroke="yellow"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></svg>');
@@ -181,7 +194,7 @@ export class ColorizeltSettingTab extends PluginSettingTab {
 	display(): void {
 		let { containerEl } = this;
 		containerEl.empty();
-		containerEl.createEl("h1", {text: "Colorizelt Colors Setting"});
+		containerEl.createEl("h2", {text: "Colorizelt Colors Setting"});
 
 		this.plugin.settings.forEach((button, index) => {
 			const setting = new Setting(containerEl)
@@ -191,37 +204,102 @@ export class ColorizeltSettingTab extends PluginSettingTab {
 					.setPlaceholder('Button name')
 					.onChange(async (value) => {
 						button.name = value;
-						await this.plugin.saveSettings()
-					}))
-
-			setting.addColorPicker(colorPicker => colorPicker
+						await this.plugin.saveSettings();
+					})
+				).addColorPicker(colorPicker => colorPicker
 					.setValue(button.color)
 					.onChange(async (value) => {
 						button.color = value;
 						await this.plugin.saveSettings();
-					}));
-
-			setting.addButton(btn => btn
+						this.display();
+					})
+				).addButton(btn => btn
 					.setButtonText("Delete")
 					.onClick(async () => {
 						this.plugin.settings.splice(index, 1);
 						await this.plugin.saveSettings();
 						this.display();
-					}));
+					})
+				);
 		});
 		
 		const newButtonSetting = new Setting(containerEl)
 			.addButton(btn => btn
-					.setButtonText("Add Button")
-					.setCta()
+				.setButtonText("Add Button")
+				.setCta()
+				.onClick(async () => {
+					this.plugin.settings.push({
+						id: `button-{Date.now()}`,
+						name: "000000",
+						color: "#000000"
+					});
+					await this.plugin.saveSettings();
+					this.display();
+				})
+			);
+	}
+}
+
+export class EditColorsModal extends Modal {
+	settings: ColorizeltSetting[];
+	saveSettings: () => void;
+
+	constructor(app: App, settings: ColorizeltSetting[], saveSettings: () => void) {
+		super(app);
+		this.settings = settings;
+		this.saveSettings = saveSettings;
+	}
+
+	onOpen() {
+		let { contentEl } = this;
+		contentEl.empty();
+		contentEl.createEl("h2", {text: "Colorizelt Colors Seting"});
+
+		this.settings.forEach((button, index) => {
+			const setting = new Setting(contentEl)
+				.setName(`${button.name.toLowerCase().replace(/\s+/g, '-')}`)
+				.addText(text => text
+					.setValue(button.name.toLowerCase().replace(/\s+/g, '-'))
+					.setPlaceholder('Button name')
+					.onChange(async (value) => {
+						button.name = value;
+						await this.saveSettings();
+					})
+				).addColorPicker(colorPicker => colorPicker
+					.setValue(button.color)
+					.onChange(async (value) => {
+						button.color = value;
+						await this.saveSettings();
+						this.onOpen();
+					})
+				).addButton(btn => btn
+					.setButtonText("Delete")
 					.onClick(async () => {
-						this.plugin.settings.push({
-							id: `button-{Date.now()}`,
-							name: "000000",
-							color: "#000000"
-						});
-						await this.plugin.saveSettings();
-						this.display();
-					}));
+						this.settings.splice(index, 1);
+						await this.saveSettings();
+						this.onOpen();
+					})
+				);
+		});
+
+		const newButtonSetting = new Setting(contentEl)
+			.addButton(btn => btn
+				.setButtonText("Add Button")
+				.setCta()
+				.onClick(async () => {
+					this.settings.push({
+						id: `button-{Date.now()}`,
+						name: "000000",
+						color: "#000000"
+					});
+					await this.saveSettings();
+					this.onOpen();
+				})
+			);
+	}
+
+	onClose() {
+		let { contentEl } = this;
+		contentEl.empty();
 	}
 }
