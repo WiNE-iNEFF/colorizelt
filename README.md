@@ -34,10 +34,13 @@
 - [ ] Add different type of text highlights
 
 ## <p align="center">Development support</p>
-If you want to support this project and author of this project:</br>
-**TON**: *UQDXHLtVLfeMsUjk_XtvgEC6CYxo63ZkLOrrFlaAe2cGn3-Z*</br>
-**BTC**: *3KhWEKA2LpGeesshPCfgRRLsZuBHFtCnfU*</br>
-**USDT (TRC20)**: *TGfzwpq2FhQbWisZMWyY98h2KgqV2JVjFH*
+<p align="center">If you want to support this project and author of this project:</p>
+
+| Wallet       | Adress                                           |
+| ------------ | ------------------------------------------------ |
+| TON          | UQDXHLtVLfeMsUjk_XtvgEC6CYxo63ZkLOrrFlaAe2cGn3-Z |
+| BTC          | 3KhWEKA2LpGeesshPCfgRRLsZuBHFtCnfU               |
+| USDT (TRC20) | TGfzwpq2FhQbWisZMWyY98h2KgqV2JVjFH               |
 
 <hr>
-<p align="center">MIT licensed | Copyright Ⓒ 2024 Artsem Holub</p>
+<p align="center">Licensed under MIT | Copyright Ⓒ 2024 Artsem Holub</p>
