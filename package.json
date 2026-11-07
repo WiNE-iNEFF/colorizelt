@@ -1,11 +1,11 @@
 {
   "name": "colorizelt",
-  "version": "0.0.7",
+  "version": "0.0.7.1",
   "description": "Easy color and clear selected text",
   "main": "main.js",
   "scripts": {
-    "dev": "tsc -w main.ts",
-    "build": "tsc main.ts"
+    "dev": "tsc -w",
+    "build": "tsc"
   },
   "moduleFileExtensions": [
     "js",
@@ -25,7 +25,7 @@
     "@codemirror/state": "^6.0.0",
     "@codemirror/view": "^6.0.0",
     "@types/node": "^22.5.4",
-    "obsidian": "^1.6.6",
+    "obsidian": "^1.14.4",
     "typescript": "^4.2.4"
   }
 }
